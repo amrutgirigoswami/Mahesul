@@ -32,4 +32,6 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::prefix('admin')->group(function () {
     Route::get('/user-profile', [UserController::class, 'index'])->name('user.profile');
+    Route::post('/user-profile-update/{id}', [UserController::class, 'UpdateUser'])->name('user.profile.update');
+    Route::post('/password/update/{id}', [UserController::class, 'updatePassword'])->name('user.password.update');
 });

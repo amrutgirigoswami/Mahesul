@@ -33,6 +33,7 @@
     <link href="{{ asset('assets/vendor/remixicon/remixicon.css ') }}" rel="stylesheet">
     <link href="{{ asset('assets/vendor/simple-datatables/style.css ') }}" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.7.12/sweetalert2.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
     <!-- Template Main CSS File -->
     <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet">
 
@@ -51,7 +52,8 @@
 
         <x-users.footer />
     @endauth
-
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"
+        integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
     <!-- Vendor JS Files -->
     <script src="{{ asset('assets/vendor/apexcharts/apexcharts.min.js') }}"></script>
     <script src="{{ asset('assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
@@ -62,10 +64,54 @@
     <script src="{{ asset('assets/vendor/tinymce/tinymce.min.js') }}"></script>
     <script src="{{ asset('assets/vendor/php-email-form/validate.js') }}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.7.12/sweetalert2.all.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <!-- Template Main JS File -->
     <script src="{{ asset('assets/js/main.js') }}"></script>
 
     <script>
+        $(document).ready(function() {
+
+            toastr.options = {
+                "closeButton": true,
+                "debug": false,
+                "newestOnTop": true,
+                "progressBar": true,
+                "positionClass": "toast-top-right",
+                "preventDuplicates": false,
+                "showDuration": "300",
+                "hideDuration": "1000",
+                "timeOut": "5000",
+                "extendedTimeOut": "1000",
+                "showEasing": "swing",
+                "hideEasing": "linear",
+                "showMethod": "fadeIn",
+                "hideMethod": "fadeOut"
+            }
+            @foreach (['error', 'warning', 'success', 'info'] as $msg)
+                @if (Session::has($msg))
+                    var type = '{{ $msg }}';
+                    var msg = '{{ Session::get($msg) }}';
+                    switch (type) {
+                        case 'success':
+                            toastr.success(msg);
+                            break;
+
+                        case 'error':
+                            toastr.error(msg);
+                            break;
+
+                        case 'warning':
+                            toastr.warning(msg);
+                            break;
+
+                        case 'info':
+                            toastr.info(msg);
+                            break;
+                    }
+                @endif
+            @endforeach
+        });
+
         function logoutAdmin(formId) {
             Swal.fire({
                 title: "Are you sure you want to logout ?",
