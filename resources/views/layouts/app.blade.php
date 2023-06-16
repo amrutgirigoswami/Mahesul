@@ -34,6 +34,7 @@
     <link href="{{ asset('assets/vendor/simple-datatables/style.css ') }}" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.7.12/sweetalert2.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
     <!-- Template Main CSS File -->
     <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet">
 
@@ -44,10 +45,13 @@
         <x-users.header />
         <x-users.sidebar />
     @endauth
-    <main id="main" class="main">
-        <x-users.breadcrumb :title="$title" :breadcrumb="$breadcrumb" />
-        @yield('content')
-    </main>
+    @auth
+        <main id="main" class="main">
+            <x-users.breadcrumb :title="$title" :breadcrumb="$breadcrumb" />
+            @yield('content')
+        </main>
+        @include('layouts.allModal')
+    @endauth
     @auth
 
         <x-users.footer />
@@ -65,6 +69,7 @@
     <script src="{{ asset('assets/vendor/php-email-form/validate.js') }}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.7.12/sweetalert2.all.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
     <!-- Template Main JS File -->
     <script src="{{ asset('assets/js/main.js') }}"></script>
 
@@ -130,6 +135,41 @@
                 }
             });
         };
+
+
+        $(function() {
+            var dateFormat = "d/m/yy",
+                from = $("#from")
+                .datepicker({
+                    defaultDate: "+1w",
+                    changeMonth: true,
+                    changeYear: true,
+                    numberOfMonths: 1
+                })
+                .on("change", function() {
+                    to.datepicker("option", "minDate", getDate(this));
+                }),
+                to = $("#to").datepicker({
+                    defaultDate: "+1w",
+                    changeMonth: true,
+                    changeYear: true,
+                    numberOfMonths: 1
+                })
+                .on("change", function() {
+                    from.datepicker("option", "maxDate", getDate(this));
+                });
+
+            function getDate(element) {
+                var date;
+                try {
+                    date = $.datepicker.parseDate(dateFormat, element.value);
+                } catch (error) {
+                    date = null;
+                }
+
+                return date;
+            }
+        });
     </script>
 </body>
 

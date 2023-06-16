@@ -42,7 +42,7 @@ class LoginController extends Controller
     }
     public function showLoginForm()
     {
-        App::setLocale('gu');
+
         return view('auth.login');
     }
 
