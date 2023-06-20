@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\App;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Providers\RouteServiceProvider;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
 class LoginController extends Controller
@@ -29,8 +30,17 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = RouteServiceProvider::HOME;
-
+    // protected $redirectTo = RouteServiceProvider::HOME;
+    protected function authenticated()
+    {
+        if (Auth::user()->role_as == '1') {
+            Session::flash('success', 'Wel come to Super Admin Dashboard');
+            return redirect('superAdmin/dashboard');
+        } else {
+            Session::flash('success', 'Logged in successfully');
+            return redirect('home');
+        }
+    }
     /**
      * Create a new controller instance.
      *

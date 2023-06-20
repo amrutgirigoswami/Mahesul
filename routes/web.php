@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\UserManageController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
@@ -29,8 +31,8 @@ Route::post('/', [LoginController::class, 'login'])->name('login');
 
 
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::prefix('admin')->group(function () {
     Route::get('/user-profile', [UserController::class, 'index'])->name('user.profile');
     Route::post('/user-profile-update/{id}', [UserController::class, 'UpdateUser'])->name('user.profile.update');
@@ -41,7 +43,18 @@ Route::prefix('admin')->group(function () {
 });
 
 
-Route::prefix('superadmin')->group(function () {
-    Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->name('register');
-    Route::post('/register', [RegisterController::class, 'register']);
+Route::prefix('superAdmin')->middleware(['auth', 'superAdmin'])->group(function () {
+    // Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->name('register');
+    // Route::post('/register', [RegisterController::class, 'register']);
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('superAdmin.dashboard');
+
+    // all user routes
+    Route::get('/user-manage', [UserManageController::class, 'index'])->name('users.list');
+    Route::post('/user/listdata', [UserManageController::class, 'AjaxDataTable'])->name('users.listdata');
+    Route::get('/add-user', [UserManageController::class, 'CreateUser'])->name('users.create');
+    Route::post('/store-user', [UserManageController::class, 'StoreUser'])->name('users.store');
+    Route::post('/user/change-status/{id}', [UserManageController::class, 'statusChange'])->name('users.status.change');
+    Route::get('/edit-user/{id}', [UserManageController::class, 'EditUser'])->name('users.edit');
+    Route::post('/update-user/{id}', [UserManageController::class, 'UpdateUser'])->name('users.update');
+    Route::delete('/user/destroy/{id}', [UserManageController::class, 'DeleteUser'])->name('users.delete');
 });
