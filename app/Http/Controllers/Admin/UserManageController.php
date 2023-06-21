@@ -6,12 +6,15 @@ use Throwable;
 use Carbon\Carbon;
 use App\Models\User;
 use App\Traits\ImageTrait;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Notification;
 use App\Http\Requests\Admin\CreateUserRequest;
+use App\Notifications\User\PasswordNotification;
 
 class UserManageController extends Controller
 {
@@ -114,7 +117,8 @@ class UserManageController extends Controller
         $userData = $request->safe()->all();
 
         $file = $request->file('profile_image');
-        $userData['password'] = Hash::make('admin@1313');
+        $password = Str::random(8);
+        $userData['password'] = Hash::make($password);
         if ($file) {
             $path = $this->imageUpload($file, 'user');
             $userData['profile_image'] = $path;
@@ -124,8 +128,16 @@ class UserManageController extends Controller
                 $this->fileRemove($userImage);
             }
         }
-        User::create($userData);
 
+        $user = User::create($userData);
+
+        $adminNotificationData = [
+            "user" => $user,
+            "password" => $password,
+        ];
+        // $userData['email']->notify(new PasswordNotification($adminNotificationData));
+        Notification::route('mail', $user->email)->notify(new PasswordNotification($adminNotificationData));
+        // dd($password);
         Session::flash('success', 'User Created Successfully');
         return redirect(route('users.list'));
     }

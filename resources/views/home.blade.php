@@ -4,12 +4,23 @@
     <div class="row mt-3 mb-4 d-flex justify-content-end">
         <div class="col-md-3 shadow border px-2 py-2">
             <div class="form-group ">
-                <select name="year" id="" class="form-select">
-                    <option value="2023-24">2023-24</option>
-                    <option value="2022-23">2022-23</option>
-                    <option value="2021-22">2021-22</option>
-                    <option value="2020-21">2020-21</option>
-                    <option value="2019-20">2019-20</option>
+                <select name="year" id="year" onchange="selectYear(this)" class="form-select select_year">
+                    <option value="">Select</option>
+                    <option value="2023-24"
+                        {{ $year->auth_id == Auth::user()->id && $year->year == '2023-24' ? 'selected' : '' }}>2023-24
+                    </option>
+                    <option value="2022-23"
+                        {{ $year->auth_id == Auth::user()->id && $year->year == '2022-23' ? 'selected' : '' }}>2022-23
+                    </option>
+                    <option value="2021-22"
+                        {{ $year->auth_id == Auth::user()->id && $year->year == '2021-22' ? 'selected' : '' }}>2021-22
+                    </option>
+                    <option value="2020-21"
+                        {{ $year->auth_id == Auth::user()->id && $year->year == '2020-21' ? 'selected' : '' }}>2020-21
+                    </option>
+                    <option value="2019-20"
+                        {{ $year->auth_id == Auth::user()->id && $year->year == '2019-20' ? 'selected' : '' }}>2019-20
+                    </option>
                 </select>
             </div>
         </div>
@@ -79,7 +90,8 @@
                         <div class="col-xxl-3 col-md-6 p-3 bg-secondary text-white  border">
                             <h5 class="font-weight-bold float-end">કુલ શિક્ષણ બિનખેતી માંગણું</h5>
                             <div class="d-flex justify-content-between mt-5">
-                                <img src="{{ asset('commonImage/2.png') }}" style="width: 50px;height:50px;" alt="">
+                                <img src="{{ asset('commonImage/2.png') }}" style="width: 50px;height:50px;"
+                                    alt="">
                                 <h3 class="mt-2">158254.00</h3>
                             </div>
                         </div><!-- End Sales Card -->
@@ -87,7 +99,8 @@
                         <div class="col-xxl-3 col-md-6 p-3 bg-info text-white  border">
                             <h5 class="font-weight-bold float-end">કુલ જિલ્લા પંચાયત બિનખેતી</h5>
                             <div class="d-flex justify-content-between mt-5">
-                                <img src="{{ asset('commonImage/3.png') }}" style="width: 50px;height:50px;" alt="">
+                                <img src="{{ asset('commonImage/3.png') }}" style="width: 50px;height:50px;"
+                                    alt="">
                                 <h3 class="mt-2">158254.00</h3>
                             </div>
                         </div><!-- End Sales Card -->
@@ -108,4 +121,26 @@
 
 
     </div>
+@endsection
+
+@section('script')
+    <script>
+        $('.select_year').on("change", function() {
+            var year = $('#year').val();
+            var data = {
+                year: year,
+                _token: csrfToken,
+            }
+            $.ajax({
+                type: "POST",
+                url: "admin/yearSet",
+                data: data,
+                dataType: "json",
+                success: function(response) {
+                    toastr.success(response.message);
+
+                }
+            });
+        });
+    </script>
 @endsection

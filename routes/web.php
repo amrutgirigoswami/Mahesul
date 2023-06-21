@@ -1,14 +1,15 @@
 <?php
 
-use App\Http\Controllers\Admin\DashboardController;
-use App\Http\Controllers\Admin\UserManageController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Models\Models\AccountSettings;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
-use App\Http\Controllers\FrontUser\AccountSetting\AccountSettingController;
 use App\Http\Controllers\FrontUser\UserController;
-use App\Models\Models\AccountSettings;
+use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\UserManageController;
+use App\Http\Controllers\FrontUser\AccountSetting\AccountSettingController;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,6 +41,8 @@ Route::prefix('admin')->group(function () {
 
     Route::get('/account-setting', [AccountSettingController::class, 'index'])->name('user.account.setting');
     Route::post('/store-account-settings', [AccountSettingController::class, 'store'])->name('user.account.setting.store');
+
+    Route::post('/yearSet', [HomeController::class, 'SetYear'])->name('user.setyear');
 });
 
 

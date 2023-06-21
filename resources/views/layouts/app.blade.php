@@ -74,6 +74,7 @@
     <script src="{{ asset('assets/js/main.js') }}"></script>
 
     <script>
+        const csrfToken = "{{ csrf_token() }}";
         $(document).ready(function() {
 
             toastr.options = {
@@ -171,6 +172,8 @@
             }
         });
     </script>
+
+    @yield('script')
 </body>
 
 </html>

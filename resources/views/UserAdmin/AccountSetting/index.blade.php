@@ -20,7 +20,7 @@
                                 <div class="col-md-6 col-lg-3">
                                     <input name="start_date" type="text"
                                         class="form-control @error('start_date') is-invalid @enderror" readonly
-                                        id="from" value="{{ $accountSettings->start_date }}">
+                                        id="from" value="{{ $accountSettings->start_date ?? '' }}">
 
                                     @error('start_date')
                                         <div class="invalid-feedback">
@@ -32,7 +32,7 @@
                                 <div class="col-md-6 col-lg-3">
                                     <input name="end_date" type="text"
                                         class="form-control @error('end_date') is-invalid @enderror" readonly id="to"
-                                        value="{{ $accountSettings->end_date }}">
+                                        value="{{ $accountSettings->end_date ?? '' }}">
 
                                     @error('end_date')
                                         <div class="invalid-feedback">

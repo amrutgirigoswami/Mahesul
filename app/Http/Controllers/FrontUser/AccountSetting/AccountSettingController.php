@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Models\AccountSettings;
 use Illuminate\Support\Facades\Session;
 use App\Models\Models\AccountSettings as ModelsAccountSettings;
+use Carbon\Carbon;
 
 class AccountSettingController extends Controller
 {
@@ -50,15 +51,15 @@ class AccountSettingController extends Controller
         if (empty($AccountSettings)) {
             $AccountData = new AccountSetting();
             $AccountData->user_id = Auth::user()->id;
-            $AccountData->start_date = $request->start_date;
-            $AccountData->end_date = $request->end_date;
+            $AccountData->start_date =  $request->start_date;
+            $AccountData->end_date =  $request->end_date;
             $AccountData->save();
 
             Session::flash('success', 'Account Setting Updated Successfully');
             return redirect(route('user.account.setting'));
         } else {
-            $AccountSettings->start_date = $request->start_date;
-            $AccountSettings->end_date = $request->end_date;
+            $AccountSettings->start_date =  $request->start_date;
+            $AccountSettings->end_date =  $request->end_date;
             $AccountSettings->update();
             Session::flash('success', 'Account Setting Updated Successfully');
             return redirect(route('user.account.setting'));
