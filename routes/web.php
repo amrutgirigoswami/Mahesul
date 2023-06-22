@@ -10,6 +10,7 @@ use App\Http\Controllers\FrontUser\UserController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\UserManageController;
 use App\Http\Controllers\FrontUser\AccountSetting\AccountSettingController;
+use App\Http\Controllers\FrontUser\Kheti\KhetiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -43,6 +44,13 @@ Route::prefix('admin')->group(function () {
     Route::post('/store-account-settings', [AccountSettingController::class, 'store'])->name('user.account.setting.store');
 
     Route::post('/yearSet', [HomeController::class, 'SetYear'])->name('user.setyear');
+
+    // All Kheti Routes
+    Route::controller(KhetiController::class)->group(function () {
+        Route::get('/kheti', 'index')->name('kheti.list');
+        Route::post('/kheti/listdata', 'AjaxDataTable')->name('kheti.listdata');
+        Route::post('/kheti-store-account', 'StoreAccount')->name('kheti.store');
+    });
 });
 
 

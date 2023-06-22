@@ -41,7 +41,7 @@
                             <h5 class="font-weight-bold float-end">કુલ ખેતી માંગણું</h5>
                             <div class="d-flex justify-content-between mt-5">
                                 <img src="{{ asset('commonImage/1.png') }}" style="width: 50px;height:50px;" alt="">
-                                <h3 class="mt-2">158254.00</h3>
+                                <h3 class="mt-2">0.00</h3>
                             </div>
                         </div><!-- End Sales Card -->
 
@@ -49,7 +49,7 @@
                             <h5 class="font-weight-bold float-end">કુલ શિક્ષણ ખેતી માંગણું</h5>
                             <div class="d-flex justify-content-between mt-5">
                                 <img src="{{ asset('commonImage/2.png') }}" style="width: 50px;height:50px;" alt="">
-                                <h3 class="mt-2">158254.00</h3>
+                                <h3 class="mt-2">0.00</h3>
                             </div>
                         </div><!-- End Sales Card -->
 
@@ -57,7 +57,7 @@
                             <h5 class="font-weight-bold float-end">કુલ ખેતી</h5>
                             <div class="d-flex justify-content-between mt-5">
                                 <img src="{{ asset('commonImage/3.png') }}" style="width: 50px;height:50px;" alt="">
-                                <h3 class="mt-2">158254.00</h3>
+                                <h3 class="mt-2">0.00</h3>
                             </div>
                         </div><!-- End Sales Card -->
 
@@ -83,7 +83,7 @@
                             <h5 class="font-weight-bold float-end">કુલ બિનખેતી માંગણું</h5>
                             <div class="d-flex justify-content-between mt-5">
                                 <img src="{{ asset('commonImage/1.png') }}" style="width: 50px;height:50px;" alt="">
-                                <h3 class="mt-2">158254.00</h3>
+                                <h3 class="mt-2">0.00</h3>
                             </div>
                         </div><!-- End Sales Card -->
 
@@ -92,7 +92,7 @@
                             <div class="d-flex justify-content-between mt-5">
                                 <img src="{{ asset('commonImage/2.png') }}" style="width: 50px;height:50px;"
                                     alt="">
-                                <h3 class="mt-2">158254.00</h3>
+                                <h3 class="mt-2">0.00</h3>
                             </div>
                         </div><!-- End Sales Card -->
 
@@ -101,7 +101,7 @@
                             <div class="d-flex justify-content-between mt-5">
                                 <img src="{{ asset('commonImage/3.png') }}" style="width: 50px;height:50px;"
                                     alt="">
-                                <h3 class="mt-2">158254.00</h3>
+                                <h3 class="mt-2">0.00</h3>
                             </div>
                         </div><!-- End Sales Card -->
 
