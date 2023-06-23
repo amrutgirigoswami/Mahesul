@@ -32,109 +32,21 @@ $(document).ready(function () {
             },
         },
         columns: [
-            {
-                data: "id",
-            },
-            {
-                data: "account_id",
-            },
-            {
-                data: "account_holder_name",
-            },
-            {
-                data: "mulatvi",
-            },
-            {
-                data: "sarkari",
-            },
-            {
-                data: "local",
-            },
-            {
-                data: "farti",
-            },
-            {
-                data: "total",
-            },
-            {
-                data: "chhut",
-            },
-            {
-                data: "past_jadde",
-            },
-            {
-                data: "status",
-            },
-            {
-                data: "actions",
-
-            },
+            { data: "id", responsivePriority: -1, width: "50px" },
+            { data: "account_id", width: "50px" },
+            { data: "account_holder_name", responsivePriority: -1, width: "50px" },
+            { data: "mulatvi", width: "50px" },
+            { data: "sarkari", width: "50px" },
+            { data: "local", width: "50px" },
+            { data: "farti", width: "50px" },
+            { data: "total", width: "50px" },
+            { data: "chhut", width: "50px" },
+            { data: "past_jadde", width: "50px" },
+            { data: "status", width: "50px" },
+            { data: "actions", width: "50px" },
         ],
-        columnDefs: [
-            {
-                width: "50px",
-                targets: 0,
-                title: "#",
-            },
-            {
-                width: "75px",
-                targets: 1,
-
-            },
-            {
-                width: "300px",
-                targets: 2,
-
-            },
-            {
-                width: "75px",
-                targets: 3,
-
-            },
-
-            {
-                width: "75px",
-                targets: 4,
 
 
-            },
-            {
-                width: "75px",
-                targets: 5,
-
-            },
-            {
-                width: "75px",
-                targets: 6,
-
-            },
-            {
-                width: "75px",
-                targets: 7,
-
-            },
-            {
-                width: "75px",
-                targets: 8,
-
-            },
-            {
-                width: "120px",
-                targets: 9,
-
-            },
-            {
-                width: "75px",
-                targets: 10,
-
-            },
-            {
-                width: "75px",
-                targets: 11,
-
-            },
-
-        ],
     });
 
 
@@ -162,19 +74,50 @@ $('.CreateAccount').on("click", function () {
         success: function (response) {
 
             if (response.status == 400) {
-                //toastr.error(response.message);
-                $.each(response.errors, function (key, err_value) {
-                    toastr.error(err_value.message);
+
+                $.each(response.message, function (key, err_value) {
+                    toastr.error(err_value);
                 });
             }
             if (response.status == 200) {
+                $("#kheti_table").DataTable().ajax.reload();
                 toastr.success(response.message);
+                $('#createAccount').modal('hide');
+                $('#createAccount').find('input').val('');
             }
         }
     });
 
 });
 
+function UpdateAccount(e) {
+
+    var KhetiID = $(e).attr("data-id");
+    var dataUrl = $(e).attr("data-url");
+
+    $.ajax({
+        type: "GET",
+        url: dataUrl,
+        dataType: "json",
+        success: function (response) {
+            if (response.status == 200) {
+                $('.account_id').val(response.kheti.account_id);
+                $('.account_holder_name').val(response.kheti.account_holder_name);
+                $('.mulatvi').val(response.kheti.mulatvi);
+                $('.sarkari').val(response.kheti.sarkari);
+                $('.local').val(response.kheti.local);
+                $('.farti').val(response.kheti.farti);
+                $('.total').val(response.kheti.total);
+                $('.chhut').val(response.kheti.chhut);
+                $('.past_jadde').val(response.kheti.past_jadde);
+
+            }
+            else {
+                console.log(response.status);
+            }
+        }
+    });
+}
 var statusChangeAjax = null;
 function statusChangeFunction(e) {
     var url = $(e).attr("data-url");
@@ -206,7 +149,7 @@ function statusChangeFunction(e) {
                     }
                 },
                 success: function (resultData) {
-                    $("#userTable").DataTable().ajax.reload();
+                    $("#kheti_table").DataTable().ajax.reload();
                     toastr.success("Status Change Successfully");
                 },
                 error: function (jqXHR, ajaxOptions, thrownError) {
@@ -264,8 +207,8 @@ function destroyFunction(e) {
                     }
                 },
                 success: function (resultData) {
-                    $("#userTable").DataTable().ajax.reload();
-                    toastr.info("User Deleted Successfully");
+                    $("#kheti_table").DataTable().ajax.reload();
+                    toastr.info("Kheti Account Deleted Successfully");
                 },
                 error: function (jqXHR, ajaxOptions, thrownError) {
                     if (jqXHR.status == 401 || jqXHR.status == 419) {

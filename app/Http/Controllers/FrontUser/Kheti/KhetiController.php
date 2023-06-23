@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\FrontUser\Kheti;
 
+use Throwable;
 use App\Models\Kheti;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -74,9 +75,9 @@ class KhetiController extends Controller
                 $nestedData['chhut'] = $row->chhut ?? '';
                 $nestedData['past_jadde'] = $row->past_jadde ?? '';
                 if ($row->status == '0') {
-                    $nestedData['status'] = '<a href="javascript:void(0)" class="btn btn-outline-success btn-sm" data-url="' . route('users.status.change', $row->id) . '" data-status="' . $row->status . '" onClick="statusChangeFunction(this)">Active</a>';
+                    $nestedData['status'] = '<a href="javascript:void(0)" class="btn btn-outline-success btn-sm" data-url="' . route('kheti.status.change', $row->id) . '" data-status="' . $row->status . '" onClick="statusChangeFunction(this)">Active</a>';
                 } else {
-                    $nestedData['status'] = '<a href="javascript:void(0)" class="btn btn-outline-danger btn-sm " data-url="' . route('users.status.change', $row->id) . '" data-status="' . $row->status . '" onClick="statusChangeFunction(this)">In Active</a>';
+                    $nestedData['status'] = '<a href="javascript:void(0)" class="btn btn-outline-danger btn-sm " data-url="' . route('kheti.status.change', $row->id) . '" data-status="' . $row->status . '" onClick="statusChangeFunction(this)">In Active</a>';
                 }
 
                 // $nestedData['user_type'] = $user->role_as;
@@ -85,8 +86,9 @@ class KhetiController extends Controller
                 // $nestedData['destroy_url'] = route('admin.user.destroy', $user->id);
                 // $nestedData['status_change_url'] = route('admin.user.status.change', $user->id);
 
-                $nestedData['actions'] = '<a href="' . route('users.edit', $row->id) . '" class="btn btn-primary text-white btn-sm user_edit">Edit</a>
-                <a href="javascript:void(0)" onClick="destroyFunction(this)" data-id="' . $row->id . '"  data-url="' . route('users.delete', $row->id) . '" class="btn btn-danger text-white btn-sm user_delete">Delete</a>';
+                $nestedData['actions'] = '<a href="javascript:void(0)"  data-bs-toggle="modal"
+                            data-bs-target="#updateAccount" class="btn btn-primary text-white btn-sm" data-url="' . route('kheti.edit', $row->id) . '" data-id="' . $row->id . '" onclick="UpdateAccount(this)"><i class="bi bi-pencil-square"></i></a>
+                <a href="javascript:void(0)" onClick="destroyFunction(this)" data-id="' . $row->id . '"  data-url="' . route('kheti.delete', $row->id) . '" class="btn btn-danger text-white btn-sm user_delete"><i class="bi bi-trash"></i></a>';
                 $data[] = $nestedData;
                 $sr_no++;
             }
@@ -100,6 +102,22 @@ class KhetiController extends Controller
         );
 
         echo json_encode($json_data);
+    }
+    public function EditKheti($id)
+    {
+        $khetiFind = Kheti::findOrFail($id);
+
+        if (!empty($khetiFind)) {
+            return response()->json([
+                'status' => 200,
+                'kheti' => $khetiFind,
+            ]);
+        } else {
+            return response()->json([
+                'status' => 401,
+                'message' => 'Record Not Found !',
+            ]);
+        }
     }
     public function StoreAccount(Request $request)
     {
@@ -137,6 +155,47 @@ class KhetiController extends Controller
             return response()->json([
                 'status' => 200,
                 'message' => 'Account Created Successfully',
+            ]);
+        }
+    }
+    public function statusChange(Request $request, $id)
+    {
+        try {
+            $kheti = Kheti::find($id);
+            if ($request->status == '1') {
+                $status = '0';
+            } else {
+                $status = '1';
+            }
+            $kheti->status = $status;
+            $kheti->save();
+            return response()->json([
+                'state' => true,
+                'message' => 'Status Changes Successfully.',
+            ]);
+        } catch (Throwable $exception) {
+            return response()->json([
+                'state' => false,
+                'message' => $exception->getMessage(),
+            ]);
+        }
+    }
+    public function DeleteKheti($id)
+    {
+        try {
+            $kheti = Kheti::findOrFail($id);
+            if ($kheti->delete()) {
+                // Session::flash('alert-success', __('messages.admin.user_deleted_succ'));
+                return response()->json([
+                    'state' => true,
+                    'message' => 'Kheti Account Deleted Successfully',
+                ]);
+            }
+            // return redirect(route('admin.user.list'));
+        } catch (Throwable $exception) {
+            return response()->json([
+                'state' => false,
+                'message' => $exception->getMessage(),
             ]);
         }
     }

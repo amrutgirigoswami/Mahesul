@@ -50,6 +50,9 @@ Route::prefix('admin')->group(function () {
         Route::get('/kheti', 'index')->name('kheti.list');
         Route::post('/kheti/listdata', 'AjaxDataTable')->name('kheti.listdata');
         Route::post('/kheti-store-account', 'StoreAccount')->name('kheti.store');
+        Route::post('/kheti/change-status/{id}', 'statusChange')->name('kheti.status.change');
+        Route::delete('/kheti/destroy/{id}',  'DeleteKheti')->name('kheti.delete');
+        Route::get('/kheti/edit/{id}',  'EditKheti')->name('kheti.edit');
     });
 });
 
