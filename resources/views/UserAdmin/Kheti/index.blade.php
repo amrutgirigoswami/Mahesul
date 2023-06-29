@@ -50,5 +50,6 @@
     <script>
         var listDataUrl = "{{ route('kheti.listdata') }}";
         var createAccountUrl = "{{ route('kheti.store') }}";
+        
     </script>
 @endsection

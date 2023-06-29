@@ -49,8 +49,6 @@ $(document).ready(function () {
 
     });
 
-
-
 });
 
 $('.CreateAccount').on("click", function () {
@@ -82,14 +80,51 @@ $('.CreateAccount').on("click", function () {
             if (response.status == 200) {
                 $("#kheti_table").DataTable().ajax.reload();
                 toastr.success(response.message);
-                $('#createAccount').modal('hide');
+                // $('#createAccount').modal('hide');
                 $('#createAccount').find('input').val('');
             }
         }
     });
 
 });
+$('.UpdateAccount').on("click", function () {
+    var khetiID = $('#kheti_id').val();
+    console.log(khetiID);
+    var data = {
+        account_id: $('.account_id').val(),
+        account_holder_name: $('.account_holder_name').val(),
+        mulatvi: $('.mulatvi').val(),
+        sarkari: $('.sarkari').val(),
+        local: $('.local').val(),
+        farti: $('.farti').val(),
+        total: $('.total').val(),
+        chhut: $('.chhut').val(),
+        past_jadde: $('.past_jadde').val(),
+        _token: csrfToken,
+    }
+    $.ajax({
+        type: "POST",
+        url: "kheti/update/" + khetiID,
+        data: data,
+        dataType: "json",
+        success: function (response) {
+            // console.log(response);
 
+            if (response.status == 400) {
+
+                $.each(response.message, function (key, err_value) {
+                    toastr.error(err_value);
+                });
+            }
+            if (response.status == 200) {
+                $("#kheti_table").DataTable().ajax.reload();
+                toastr.success(response.message);
+                $('#updateAccount').modal('hide');
+                $('#updateAccount').find('input').val('');
+            }
+        }
+    });
+});
 function UpdateAccount(e) {
 
     var KhetiID = $(e).attr("data-id");
@@ -110,7 +145,7 @@ function UpdateAccount(e) {
                 $('.total').val(response.kheti.total);
                 $('.chhut').val(response.kheti.chhut);
                 $('.past_jadde').val(response.kheti.past_jadde);
-
+                $('#kheti_id').val(response.kheti.id);
             }
             else {
                 console.log(response.status);
@@ -174,7 +209,6 @@ function statusChangeFunction(e) {
     });
 }
 
-
 destroyFunctionAjax = null;
 function destroyFunction(e) {
     var id = $(e).attr("data-id");
@@ -236,4 +270,43 @@ function destroyFunction(e) {
             });
         }
     });
+}
+
+
+function khetiCalculation() {
+    var mulatvi = $('#mulatvi').val();
+    var sarkari = $('#sarkari').val();
+
+    var farti = $('#farti').val();
+
+
+    var past_jadde = $('#past_jadde').val();
+
+    var local = Math.ceil(sarkari / 2 / 0.05) * 0.05;
+
+    $('#local').val(local.toFixed(2));
+
+    var total = parseFloat(mulatvi) + parseFloat(sarkari) + parseFloat(farti) + parseFloat(local);
+
+    $('#total').val(total.toFixed(2));
+    $('#chhut').val(sarkari);
+}
+
+function updateKhetiCalculation() {
+
+    var mulatvi = $('.mulatvi').val();
+    var sarkari = $('.sarkari').val();
+
+    var farti = $('.farti').val();
+
+
+
+
+    var local = Math.ceil(sarkari / 2 / 0.05) * 0.05;
+    $('.local').val(local.toFixed(2));
+
+    var total = parseFloat(mulatvi) + parseFloat(sarkari) + parseFloat(farti) + parseFloat(local);
+
+    $('.total').val(total);
+    $('.chhut').val(sarkari);
 }

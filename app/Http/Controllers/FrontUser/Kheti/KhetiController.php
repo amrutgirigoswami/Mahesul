@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Auth\Events\Validated;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Requests\UserAdmin\Kheti\KhetiCreateRequest;
+use Carbon\Carbon;
 
 class KhetiController extends Controller
 {
@@ -42,7 +43,7 @@ class KhetiController extends Controller
         $order = $columns[$request->input('order.0.column')];
         $dir = $request->input('order.0.dir');
 
-        $kheti = Kheti::where('deleted_at', NULL)->orderBy($order, $dir);
+        $kheti = Kheti::where('deleted_at', NULL)->where('auth_id', Auth::user()->id)->orderBy($order, $dir);
         $totalData = $kheti->count();
 
         $totalFiltered = $totalData;
@@ -67,13 +68,13 @@ class KhetiController extends Controller
                 $nestedData['id'] = $row->id;
                 $nestedData['account_id'] = $row->account_id;
                 $nestedData['account_holder_name'] = $row->account_holder_name ?? 'N/A';
-                $nestedData['mulatvi'] = $row->mulatvi ?? '';
-                $nestedData['sarkari'] = $row->sarkari ?? '';
-                $nestedData['local'] = $row->local ?? '';
-                $nestedData['farti'] = $row->farti ?? '';
-                $nestedData['total'] = $row->total ?? '';
-                $nestedData['chhut'] = $row->chhut ?? '';
-                $nestedData['past_jadde'] = $row->past_jadde ?? '';
+                $nestedData['mulatvi'] = number_format($row->mulatvi, 2) ?? '';
+                $nestedData['sarkari'] = number_format($row->sarkari, 2) ?? '';
+                $nestedData['local'] = number_format($row->local, 2) ?? '';
+                $nestedData['farti'] = number_format($row->farti, 2) ?? '';
+                $nestedData['total'] = number_format($row->total, 2) ?? '';
+                $nestedData['chhut'] = number_format($row->chhut, 2) ?? '';
+                $nestedData['past_jadde'] = number_format($row->past_jadde, 2) ?? '';
                 if ($row->status == '0') {
                     $nestedData['status'] = '<a href="javascript:void(0)" class="btn btn-outline-success btn-sm" data-url="' . route('kheti.status.change', $row->id) . '" data-status="' . $row->status . '" onClick="statusChangeFunction(this)">Active</a>';
                 } else {
@@ -119,6 +120,46 @@ class KhetiController extends Controller
             ]);
         }
     }
+    public function UpdateAccount(Request $request, $id)
+    {
+        $validator = Validator::make($request->all(), [
+            'account_holder_name' => 'required',
+            'mulatvi' => 'required',
+            'sarkari' => 'required',
+            'local' => 'required',
+            'farti' => 'required',
+            'total' => 'required',
+            'chhut' => 'required',
+            'past_jadde' => 'required',
+        ]);
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => 400,
+                'message' => $validator->messages(),
+            ]);
+        } else {
+            $khetiData = Kheti::findOrFail($id);
+
+            $khetiData->account_id = $request->input('account_id');
+            $khetiData->auth_id = Auth::user()->id;
+            $khetiData->account_holder_name = $request->input('account_holder_name');
+            $khetiData->mulatvi = $request->input('mulatvi');
+            $khetiData->sarkari = $request->input('sarkari');
+            $khetiData->local = $request->input('local');
+            $khetiData->farti = $request->input('farti');
+            $khetiData->total = $request->input('total');
+            $khetiData->chhut = $request->input('chhut');
+            $khetiData->past_jadde = $request->input('past_jadde');
+            $year = Carbon::now()->format('Y');
+            $khetiData->year = $year;
+            $khetiData->update();
+
+            return response()->json([
+                'status' => 200,
+                'message' => 'Account Updated Successfully',
+            ]);
+        }
+    }
     public function StoreAccount(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -150,6 +191,8 @@ class KhetiController extends Controller
             $khetiData->total = $request->input('total');
             $khetiData->chhut = $request->input('chhut');
             $khetiData->past_jadde = $request->input('past_jadde');
+            $year = Carbon::now()->format('Y');
+            $khetiData->year = $year;
             $khetiData->save();
 
             return response()->json([

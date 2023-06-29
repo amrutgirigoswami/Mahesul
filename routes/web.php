@@ -53,6 +53,7 @@ Route::prefix('admin')->group(function () {
         Route::post('/kheti/change-status/{id}', 'statusChange')->name('kheti.status.change');
         Route::delete('/kheti/destroy/{id}',  'DeleteKheti')->name('kheti.delete');
         Route::get('/kheti/edit/{id}',  'EditKheti')->name('kheti.edit');
+        Route::post('/kheti/update/{id}', 'UpdateAccount')->name('kheti.update');
     });
 });
 

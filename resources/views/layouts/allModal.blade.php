@@ -60,7 +60,7 @@
                     <label for="mulatvi" class="col-md-3 col-lg-3"
                         style="color: #000000;font-size: 18px;margin-top: 5px;font-weight: 400;">મુલતવી નહિ તેવી</label>
                     <div class="col-md-8 col-lg-8 col-sm-4">
-                        <input type="text" name="mulatvi" id="mulatvi"
+                        <input type="number" name="mulatvi" onkeyup="khetiCalculation()" id="mulatvi"
                             class="form-control @error('mulatvi')
                             is-invalid
                         @enderror">
@@ -75,7 +75,7 @@
                     <label for="sarkari" class="col-md-3 col-lg-3"
                         style="color: #000000;font-size: 18px;margin-top: 5px;font-weight: 400;">સરકારી</label>
                     <div class="col-md-8 col-lg-8 col-sm-4">
-                        <input type="number" name="sarkari" id="sarkari"
+                        <input type="number" name="sarkari" onkeyup="khetiCalculation()" id="sarkari"
                             class="form-control @error('sarkari')
                             is-invalid
                         @enderror">
@@ -90,7 +90,7 @@
                     <label for="local" class="col-md-3 col-lg-3"
                         style="color: #000000;font-size: 18px;margin-top: 5px;font-weight: 400;">લોકલ</label>
                     <div class="col-md-8 col-lg-8 col-sm-4">
-                        <input type="number" name="local" id="local"
+                        <input type="number" name="local" onkeyup="khetiCalculation()" id="local"
                             class="form-control @error('local')
                             is-invalid
                         @enderror">
@@ -105,7 +105,7 @@
                     <label for="farti" class="col-md-3 col-lg-3"
                         style="color: #000000;font-size: 18px;margin-top: 5px;font-weight: 400;">ફરતી</label>
                     <div class="col-md-8 col-lg-8 col-sm-4">
-                        <input type="number" name="farti" id="farti"
+                        <input type="number" name="farti" onkeyup="khetiCalculation()" id="farti"
                             class="form-control @error('farti')
                             is-invalid
                         @enderror">
@@ -120,7 +120,7 @@
                     <label for="total" class="col-md-3 col-lg-3"
                         style="color: #000000;font-size: 18px;margin-top: 5px;font-weight: 400;">કુલ માંગણું</label>
                     <div class="col-md-8 col-lg-8 col-sm-4">
-                        <input type="number" name="total" id="total"
+                        <input type="number" name="total" onkeyup="khetiCalculation()" id="total"
                             class="form-control @error('total')
                             is-invalid
                         @enderror">
@@ -135,7 +135,7 @@
                     <label for="chhut" class="col-md-3 col-lg-3"
                         style="color: #000000;font-size: 18px;margin-top: 5px;font-weight: 400;">છૂટ</label>
                     <div class="col-md-8 col-lg-8 col-sm-4">
-                        <input type="number" name="chhut" id="chhut"
+                        <input type="number" name="chhut" onkeyup="khetiCalculation()" id="chhut"
                             class="form-control @error('chhut')
                             is-invalid
                         @enderror">
@@ -150,7 +150,7 @@
                     <label for="past_jadde" class="col-md-3 col-lg-3"
                         style="color: #000000;font-size: 18px;margin-top: 5px;font-weight: 400;">ગત વર્ષની જાદે</label>
                     <div class="col-md-8 col-lg-8 col-sm-4">
-                        <input type="number" name="past_jadde" id="past_jadde"
+                        <input type="number" name="past_jadde" onkeyup="khetiCalculation()" id="past_jadde"
                             class="form-control @error('past_jadde')
                             is-invalid
                         @enderror">
@@ -214,7 +214,7 @@
                         style="color: #000000;font-size: 18px;margin-top: 5px;font-weight: 400;">મુલતવી નહિ
                         તેવી</label>
                     <div class="col-md-8 col-lg-8 col-sm-4">
-                        <input type="text" name="mulatvi" id="mulatvi"
+                        <input type="number" name="mulatvi" onkeyup="updateKhetiCalculation()" id="mulatvi"
                             class="form-control mulatvi @error('mulatvi')
                             is-invalid
                         @enderror">
@@ -229,7 +229,7 @@
                     <label for="sarkari" class="col-md-3 col-lg-3"
                         style="color: #000000;font-size: 18px;margin-top: 5px;font-weight: 400;">સરકારી</label>
                     <div class="col-md-8 col-lg-8 col-sm-4">
-                        <input type="number" name="sarkari" id="sarkari"
+                        <input type="number" name="sarkari" onkeyup="updateKhetiCalculation()" id="sarkari"
                             class="form-control sarkari @error('sarkari')
                             is-invalid
                         @enderror">
@@ -244,7 +244,7 @@
                     <label for="local" class="col-md-3 col-lg-3"
                         style="color: #000000;font-size: 18px;margin-top: 5px;font-weight: 400;">લોકલ</label>
                     <div class="col-md-8 col-lg-8 col-sm-4">
-                        <input type="number" name="local" id="local"
+                        <input type="number" name="local" onkeyup="updateKhetiCalculation()" id="local"
                             class="form-control local @error('local')
                             is-invalid
                         @enderror">
@@ -259,7 +259,7 @@
                     <label for="farti" class="col-md-3 col-lg-3"
                         style="color: #000000;font-size: 18px;margin-top: 5px;font-weight: 400;">ફરતી</label>
                     <div class="col-md-8 col-lg-8 col-sm-4">
-                        <input type="number" name="farti" id="farti"
+                        <input type="number" name="farti" onkeyup="updateKhetiCalculation()" id="farti"
                             class="form-control farti @error('farti')
                             is-invalid
                         @enderror">
@@ -274,7 +274,7 @@
                     <label for="total" class="col-md-3 col-lg-3"
                         style="color: #000000;font-size: 18px;margin-top: 5px;font-weight: 400;">કુલ માંગણું</label>
                     <div class="col-md-8 col-lg-8 col-sm-4">
-                        <input type="number" name="total" id="total"
+                        <input type="number" name="total" onkeyup="updateKhetiCalculation()" id="total"
                             class="form-control total @error('total')
                             is-invalid
                         @enderror">
@@ -289,7 +289,7 @@
                     <label for="chhut" class="col-md-3 col-lg-3"
                         style="color: #000000;font-size: 18px;margin-top: 5px;font-weight: 400;">છૂટ</label>
                     <div class="col-md-8 col-lg-8 col-sm-4">
-                        <input type="number" name="chhut" id="chhut"
+                        <input type="number" name="chhut" onkeyup="updateKhetiCalculation()" id="chhut"
                             class="form-control chhut @error('chhut')
                             is-invalid
                         @enderror">
@@ -304,7 +304,7 @@
                     <label for="past_jadde" class="col-md-3 col-lg-3"
                         style="color: #000000;font-size: 18px;margin-top: 5px;font-weight: 400;">ગત વર્ષની જાદે</label>
                     <div class="col-md-8 col-lg-8 col-sm-4">
-                        <input type="number" name="past_jadde" id="past_jadde"
+                        <input type="number" name="past_jadde" onkeyup="updateKhetiCalculation()" id="past_jadde"
                             class="form-control past_jadde @error('past_jadde')
                             is-invalid
                         @enderror">
@@ -316,9 +316,10 @@
                     </div>
                 </div>
             </div>
+            <input type="hidden" name="kheti_id" id="kheti_id" class="khetiId">
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary CreateAccount">Create Account</button>
+                <button type="button" class="btn btn-primary UpdateAccount">Update Account</button>
             </div>
         </div>
     </div>
