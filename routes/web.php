@@ -8,6 +8,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\FrontUser\UserController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\ImportController;
 use App\Http\Controllers\Admin\UserManageController;
 use App\Http\Controllers\FrontUser\AccountSetting\AccountSettingController;
 use App\Http\Controllers\FrontUser\Kheti\KhetiController;
@@ -72,4 +73,7 @@ Route::prefix('superAdmin')->middleware(['auth', 'superAdmin'])->group(function 
     Route::get('/edit-user/{id}', [UserManageController::class, 'EditUser'])->name('users.edit');
     Route::post('/update-user/{id}', [UserManageController::class, 'UpdateUser'])->name('users.update');
     Route::delete('/user/destroy/{id}', [UserManageController::class, 'DeleteUser'])->name('users.delete');
+
+    Route::get('/file-import', [ImportController::class, 'index'])->name('file.import');
+    Route::post('/file-store', [ImportController::class, 'ImportData'])->name('file.import.store');
 });

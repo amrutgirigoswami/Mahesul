@@ -9,6 +9,7 @@ use App\Traits\ImageTrait;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
@@ -49,7 +50,7 @@ class UserManageController extends Controller
         $order = $columns[$request->input('order.0.column')];
         $dir = $request->input('order.0.dir');
 
-        $users = User::where('deleted_at', NULL)->orderBy($order, $dir);
+        $users = User::where('deleted_at', NULL)->whereNot('id', Auth::id())->orderBy($order, $dir);
         $totalData = $users->count();
 
         $totalFiltered = $totalData;
