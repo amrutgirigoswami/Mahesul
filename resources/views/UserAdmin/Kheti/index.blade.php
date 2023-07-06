@@ -5,8 +5,22 @@
 @endsection
 @section('content')
     <section class="section profile">
+
+        <div class="row ">
+            <div class="col-md-2 float-end text-center">
+                <div class="card">
+                    <div class="card-header">
+                        <h5>મુલતવી</h5>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="mt-3"><strong id="mulatviTotal"> {{ $mulatvi }}</strong></h5>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="row">
             <div class="col-xl-12  ">
+
                 <div class="card">
                     <div class="card-header">
                         <button type="button" class="btn btn-primary float-end" data-bs-toggle="modal"
@@ -14,6 +28,7 @@
                             New Account</button>
                     </div>
                     <div class="card-body mt-3">
+
                         <div class="table-responsive">
                             <table class="table talble-strip mt-3 display responsive nowrap" id="kheti_table"
                                 style="width:100%">
@@ -45,11 +60,10 @@
 
 @section('script')
     <script src="{{ asset('assets\vendor\DataTables\datatables.min.js') }}"></script>
-
+    <script src="https://cdn.datatables.net/plug-ins/1.13.5/api/sum().js"></script>
     <script src="{{ asset('AllPageJS/Kheti/list.js') }}"></script>
     <script>
         var listDataUrl = "{{ route('kheti.listdata') }}";
         var createAccountUrl = "{{ route('kheti.store') }}";
-        
     </script>
 @endsection

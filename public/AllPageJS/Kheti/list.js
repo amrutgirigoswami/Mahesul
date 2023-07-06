@@ -72,7 +72,6 @@ $('.CreateAccount').on("click", function () {
         success: function (response) {
 
             if (response.status == 400) {
-
                 $.each(response.message, function (key, err_value) {
                     toastr.error(err_value);
                 });
@@ -82,6 +81,7 @@ $('.CreateAccount').on("click", function () {
                 toastr.success(response.message);
                 // $('#createAccount').modal('hide');
                 $('#createAccount').find('input').val('');
+                $('#mulatviTotal').html(response.data.mulatvi);
             }
         }
     });

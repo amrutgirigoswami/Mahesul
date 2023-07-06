@@ -16,9 +16,13 @@ class KhetiController extends Controller
 {
     public function index()
     {
+        $kheti = Kheti::where('status', '0')->where('deleted_at', NULL);
+        $khetis = $kheti->get();
         return view('UserAdmin.Kheti.index', [
             'title' => 'Kheti List',
             'breadcrumb' => array(['title' => 'Kheti List', 'link' => ""]),
+            'khetis' => $khetis,
+            'mulatvi' => $kheti->sum('mulatvi')
         ]);
     }
     public function AjaxDataTable(Request $request)
@@ -195,7 +199,13 @@ class KhetiController extends Controller
             $khetiData->year = $year;
             $khetiData->save();
 
+            $kheti = Kheti::where('status', '0')->where('deleted_at', NULL);
+
+            $data = [
+                'mulatvi' => $kheti->sum('mulatvi')
+            ];
             return response()->json([
+                'data' => $data,
                 'status' => 200,
                 'message' => 'Account Created Successfully',
             ]);
