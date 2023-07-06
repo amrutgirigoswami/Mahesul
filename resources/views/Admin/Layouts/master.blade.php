@@ -112,6 +112,25 @@
                 @endif
             @endforeach
         });
+
+        function logoutAdmin(formId) {
+            Swal.fire({
+                title: "Are you sure you want to logout ?",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonText: "Yes, logout it!",
+                customClass: {
+                    confirmButton: 'btn btn-sm btn-success',
+                    cancelButton: 'btn btn-sm btn-danger',
+                }
+            }).then(function(result) {
+                if (result.value) {
+                    event.preventDefault();
+                    document.getElementById(formId).submit();
+
+                }
+            });
+        };
     </script>
     @yield('script')
 </body>

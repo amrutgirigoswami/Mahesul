@@ -35,7 +35,29 @@
                     <div class="card-body">
                         <form action="{{ route('file.import.store') }}" method="POST" enctype="multipart/form-data">
                             @csrf
+                            <div class="row mb-3">
+
+                                <div class="col-md-6">
+                                    <label for="file_import">Select User :</label>
+                                    <select name="user" class="form-select" id="user">
+                                        <option value=""></option>
+                                    </select>
+                                </div>
+
+                            </div>
+
+                            <div class="row mb-3">
+
+                                <div class="col-md-6">
+                                    <label for="file_import">Select Table Name :</label>
+                                    <select name="table_name" class="form-select" id="table_name">
+                                        <option value=""></option>
+                                    </select>
+                                </div>
+
+                            </div>
                             <div class="row">
+
                                 <div class="col-md-6">
                                     <label for="file_import">Select Excel File for Upload :</label>
                                     <input type="file" name="kheti_excel_file" id="file_import" class="form-control">

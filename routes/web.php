@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Models\Models\AccountSettings;
@@ -64,6 +65,11 @@ Route::prefix('superAdmin')->middleware(['auth', 'superAdmin'])->group(function 
     // Route::post('/register', [RegisterController::class, 'register']);
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('superAdmin.dashboard');
 
+    // Admin Profile Manage
+    Route::get('/profile', [AdminController::class, 'index'])->name('admin.profile');
+    Route::post('/profile-update/{id}', [AdminController::class, 'UpdateProfile'])->name('admin.profile.update');
+    Route::get('/change-password', [AdminController::class, 'ChangePassword'])->name('admin.profile.changepassword');
+
     // all user routes
     Route::get('/user-manage', [UserManageController::class, 'index'])->name('users.list');
     Route::post('/user/listdata', [UserManageController::class, 'AjaxDataTable'])->name('users.listdata');
@@ -74,6 +80,8 @@ Route::prefix('superAdmin')->middleware(['auth', 'superAdmin'])->group(function 
     Route::post('/update-user/{id}', [UserManageController::class, 'UpdateUser'])->name('users.update');
     Route::delete('/user/destroy/{id}', [UserManageController::class, 'DeleteUser'])->name('users.delete');
 
+    // All file upload routes
     Route::get('/file-import', [ImportController::class, 'index'])->name('file.import');
     Route::post('/file-store', [ImportController::class, 'ImportData'])->name('file.import.store');
+    
 });
