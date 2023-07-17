@@ -1,0 +1,11 @@
+.receiptCardDisable {
+    background: linear-gradient(to bottom right, #0099ff 0%, #000099 100%);
+    color: white;
+    font-weight: 600;
+}
+
+.receiptCardInput {
+    background: linear-gradient(to bottom right, #22dc28 0%, #0e6203 100%);
+    color: white;
+    font-weight: 600;
+}

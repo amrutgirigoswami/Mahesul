@@ -10,10 +10,60 @@
             <div class="col-md-2 float-end text-center">
                 <div class="card">
                     <div class="card-header">
-                        <h5>મુલતવી</h5>
+                        <h5>કુલ મુલતવી</h5>
                     </div>
                     <div class="card-body">
                         <h5 class="mt-3"><strong id="mulatviTotal"> {{ $mulatvi }}</strong></h5>
+                    </div>
+                </div>
+            </div>
+             <div class="col-md-2 float-end text-center">
+                <div class="card">
+                    <div class="card-header">
+                        <h5>કુલ સરકારી</h5>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="mt-3"><strong id="sarkariTotal"> {{ $sarkari }}</strong></h5>
+                    </div>
+                </div>
+            </div>
+             <div class="col-md-2 float-end text-center">
+                <div class="card">
+                    <div class="card-header">
+                        <h5>કુલ લોકલ</h5>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="mt-3"><strong id="localTotal"> {{ $local }}</strong></h5>
+                    </div>
+                </div>
+            </div>
+             <div class="col-md-2 float-end text-center">
+                <div class="card">
+                    <div class="card-header">
+                        <h5>કુલ માંગણું</h5>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="mt-3"><strong id="total"> {{ $total }}</strong></h5>
+                    </div>
+                </div>
+            </div>
+             <div class="col-md-2 float-end text-center">
+                <div class="card">
+                    <div class="card-header">
+                        <h5>કુલ છૂટ</h5>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="mt-3"><strong id="chhutTotal"> {{ $chhut }}</strong></h5>
+                    </div>
+                </div>
+            </div>
+             <div class="col-md-2 float-end text-center">
+                <div class="card">
+                    <div class="card-header">
+                        <h5>કુલ ગત વર્ષની જાદે</h5>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="mt-3"><strong id="pastJadeTotal"> {{ $past_jadde }}</strong></h5>
                     </div>
                 </div>
             </div>

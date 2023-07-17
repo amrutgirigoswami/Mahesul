@@ -22,7 +22,14 @@ class KhetiController extends Controller
             'title' => 'Kheti List',
             'breadcrumb' => array(['title' => 'Kheti List', 'link' => ""]),
             'khetis' => $khetis,
-            'mulatvi' => $kheti->sum('mulatvi')
+            'mulatvi' => $kheti->sum('mulatvi'),
+            'sarkari' => $kheti->sum('sarkari'),
+            'local' => $kheti->sum('local'),
+            'total' => $kheti->sum('total'),
+            'chhut' => $kheti->sum('chhut'),
+            'past_jadde' => $kheti->sum('past_jadde')
+
+
         ]);
     }
     public function AjaxDataTable(Request $request)
@@ -91,9 +98,11 @@ class KhetiController extends Controller
                 // $nestedData['destroy_url'] = route('admin.user.destroy', $user->id);
                 // $nestedData['status_change_url'] = route('admin.user.status.change', $user->id);
 
-                $nestedData['actions'] = '<a href="javascript:void(0)"  data-bs-toggle="modal"
+                $nestedData['actions'] = '<a href="' . route('kheti.receipt.index', $row->account_id) . '"  class="btn btn-warning text-dark btn-sm kheti_update"><i class="bi bi-card-checklist"></i></a>
+                <a href="javascript:void(0)"  data-bs-toggle="modal"
                             data-bs-target="#updateAccount" class="btn btn-primary text-white btn-sm" data-url="' . route('kheti.edit', $row->id) . '" data-id="' . $row->id . '" onclick="UpdateAccount(this)"><i class="bi bi-pencil-square"></i></a>
-                <a href="javascript:void(0)" onClick="destroyFunction(this)" data-id="' . $row->id . '"  data-url="' . route('kheti.delete', $row->id) . '" class="btn btn-danger text-white btn-sm user_delete"><i class="bi bi-trash"></i></a>';
+                <a href="javascript:void(0)" onClick="destroyFunction(this)" data-id="' . $row->id . '"  data-url="' . route('kheti.delete', $row->id) . '" class="btn btn-danger text-white btn-sm user_delete"><i class="bi bi-trash"></i></a>
+                ';
                 $data[] = $nestedData;
                 $sr_no++;
             }
@@ -202,7 +211,13 @@ class KhetiController extends Controller
             $kheti = Kheti::where('status', '0')->where('deleted_at', NULL);
 
             $data = [
-                'mulatvi' => $kheti->sum('mulatvi')
+                'mulatvi' => $kheti->sum('mulatvi'),
+                'sarkari' => $kheti->sum('sarkari'),
+                'local' => $kheti->sum('local'),
+                'total' => $kheti->sum('total'),
+                'chhut' => $kheti->sum('chhut'),
+                'past_jadde' => $kheti->sum('past_jadde')
+
             ];
             return response()->json([
                 'data' => $data,

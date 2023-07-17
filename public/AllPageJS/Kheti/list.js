@@ -82,6 +82,12 @@ $('.CreateAccount').on("click", function () {
                 // $('#createAccount').modal('hide');
                 $('#createAccount').find('input').val('');
                 $('#mulatviTotal').html(response.data.mulatvi);
+                $('#sarkariTotal').html(response.data.sarkari);
+                $('#localTotal').html(response.data.local);
+                $('#total').html(response.data.total);
+                $('#chhutTotal').html(response.data.chhut);
+                $('#pastJadeTotal').html(response.data.past_jadde);
+
             }
         }
     });

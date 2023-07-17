@@ -61,7 +61,7 @@
                                 <div class="col-md-8 col-lg-9">
                                     <input name="name" type="text"
                                         class="form-control @error('name') is-invalid @enderror" id="name"
-                                        value="{{ $user->name ? $user->name : '' }}">
+                                        value="{{ old('name',$user->name ? $user->name : '') }}">
                                     @error('name')
                                         <div class="invalid-feedback">
                                             {{ $message }}
@@ -75,7 +75,7 @@
                                 <div class="col-md-8 col-lg-9">
                                     <input name="village_name" type="text"
                                         class="form-control  @error('village_name') is-invalid @enderror" id="village_name"
-                                        value="{{ $user->village_name ? $user->village_name : '' }}">
+                                        value="{{ old('village_name',$user->village_name ? $user->village_name : '') }}">
                                     @error('village_name')
                                         <div class="invalid-feedback">
                                             {{ $message }}
@@ -88,7 +88,7 @@
                                 <div class="col-md-8 col-lg-9">
                                     <input name="taluka_name" type="text"
                                         class="form-control @error('taluka_name') is-invalid @enderror" id="taluka_name"
-                                        value="{{ $user->taluka_name ? $user->taluka_name : '' }}">
+                                        value="{{ old('taluka_name',$user->taluka_name ? $user->taluka_name : '') }}">
                                     @error('taluka_name')
                                         <div class="invalid-feedback">
                                             {{ $message }}
@@ -101,7 +101,7 @@
                                 <div class="col-md-8 col-lg-9">
                                     <input name="district_name" type="text"
                                         class="form-control @error('district_name') is-invalid @enderror" id="district_name"
-                                        value="{{ $user->district_name ? $user->district_name : '' }}">
+                                        value="{{ old('district_name',$user->district_name ? $user->district_name : '') }}">
                                     @error('district_name')
                                         <div class="invalid-feedback">
                                             {{ $message }}
@@ -113,14 +113,14 @@
                                 <label for="full_address" class="col-md-4 col-lg-3 col-form-label">Panchayat Name</label>
                                 <div class="col-md-8 col-lg-9">
                                     <input name="full_address" type="text" class="form-control" id="full_address"
-                                        value="{{ $user->full_address ? $user->full_address : '' }}">
+                                        value="{{ old('full_address',$user->full_address ? $user->full_address : '') }}">
                                 </div>
                             </div>
                             <div class="row mb-3">
                                 <label for="pincode" class="col-md-4 col-lg-3 col-form-label">Pincode No.</label>
                                 <div class="col-md-8 col-lg-9">
                                     <input name="pincode" type="text" class="form-control" id="pincode"
-                                        value="{{ $user->pincode ? $user->pincode : '' }}">
+                                        value="{{ old('pincode',$user->pincode ? $user->pincode : '') }}">
                                 </div>
                             </div>
                             <div class="row mb-3">
@@ -129,7 +129,7 @@
                                 <div class="col-md-8 col-lg-9">
                                     <input name="contact_no" type="text"
                                         class="form-control @error('contact_no') is-invalid @enderror" id="contact_no"
-                                        value="{{ $user->contact_no ? $user->contact_no : '' }}">
+                                        value="{{ old('contact_no',$user->contact_no ? $user->contact_no : '') }}">
                                     @error('contact_no')
                                         <div class="invalid-feedback">
                                             {{ $message }}
@@ -142,7 +142,7 @@
                                 <div class="col-md-8 col-lg-9">
                                     <input name="email" type="email"
                                         class="form-control @error('email') is-invalid @enderror" id="Email"
-                                        value="{{ $user->email ? $user->email : '' }}">
+                                        value="{{ old('email',$user->email ? $user->email : '') }}">
                                     @error('email')
                                         <div class="invalid-feedback">
                                             {{ $message }}

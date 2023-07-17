@@ -1,18 +1,19 @@
 <?php
 
-use App\Http\Controllers\Admin\AdminController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Models\Models\AccountSettings;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\ImportController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\FrontUser\UserController;
 use App\Http\Controllers\Admin\DashboardController;
-use App\Http\Controllers\Admin\ImportController;
 use App\Http\Controllers\Admin\UserManageController;
-use App\Http\Controllers\FrontUser\AccountSetting\AccountSettingController;
 use App\Http\Controllers\FrontUser\Kheti\KhetiController;
+use App\Http\Controllers\FrontUser\Kheti\RecieptKhetiController;
+use App\Http\Controllers\FrontUser\AccountSetting\AccountSettingController;
 
 /*
 |--------------------------------------------------------------------------
@@ -57,6 +58,11 @@ Route::prefix('admin')->group(function () {
         Route::get('/kheti/edit/{id}',  'EditKheti')->name('kheti.edit');
         Route::post('/kheti/update/{id}', 'UpdateAccount')->name('kheti.update');
     });
+
+    // All kheti receipt routes
+    Route::controller(RecieptKhetiController::class)->group(function () {
+        Route::get('/receipt/{accout_id}', 'index')->name('kheti.receipt.index');
+    });
 });
 
 
@@ -83,5 +89,4 @@ Route::prefix('superAdmin')->middleware(['auth', 'superAdmin'])->group(function 
     // All file upload routes
     Route::get('/file-import', [ImportController::class, 'index'])->name('file.import');
     Route::post('/file-store', [ImportController::class, 'ImportData'])->name('file.import.store');
-    
 });
