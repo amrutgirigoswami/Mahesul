@@ -1,11 +1,17 @@
 .receiptCardDisable {
-    background: linear-gradient(to bottom right, #0099ff 0%, #000099 100%);
+    background: linear-gradient(to bottom right, #0099ffa3 0%, #0000999c 100%);
     color: white;
     font-weight: 600;
 }
 
 .receiptCardInput {
-    background: linear-gradient(to bottom right, #22dc28 0%, #0e6203 100%);
+    background: linear-gradient(to bottom right, #22dc2891 0%, #0e6203c4 100%);
+    color: white;
+    font-weight: 600;
+}
+
+.receiptCardInputNew {
+    background: linear-gradient(to bottom right, #e9ae61d1 0%, #a25f08d6 100%);
     color: white;
     font-weight: 600;
 }

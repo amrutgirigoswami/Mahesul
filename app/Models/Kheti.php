@@ -36,6 +36,7 @@ class Kheti extends Model
         'total_receipt_collection',
         'year',
         'status',
+        'book_no',
 
     ];
 }

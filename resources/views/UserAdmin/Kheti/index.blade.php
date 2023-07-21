@@ -95,6 +95,7 @@
                                         <th>છૂટ</th>
                                         <th>ગત વર્ષની જાદે</th>
                                         <th>Status</th>
+                                        <th>Receipt</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>

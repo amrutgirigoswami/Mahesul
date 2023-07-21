@@ -43,8 +43,12 @@ $(document).ready(function () {
             { data: "chhut", width: "50px" },
             { data: "past_jadde", width: "50px" },
             { data: "status", width: "50px" },
+            { data: "receipt", width: "30px" },
             { data: "actions", width: "50px" },
         ],
+        columnDefs: [
+            { "className": "dt-center", "targets": -2 }
+        ]
 
 
     });

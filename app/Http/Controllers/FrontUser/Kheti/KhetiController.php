@@ -46,7 +46,6 @@ class KhetiController extends Controller
             8 => 'chhut',
             9 => 'past_jadde',
             10 => 'status',
-
         );
 
         $limit = $request->input('length');
@@ -91,6 +90,11 @@ class KhetiController extends Controller
                 } else {
                     $nestedData['status'] = '<a href="javascript:void(0)" class="btn btn-outline-danger btn-sm " data-url="' . route('kheti.status.change', $row->id) . '" data-status="' . $row->status . '" onClick="statusChangeFunction(this)">In Active</a>';
                 }
+                if ($row->receipt_no != NULL) {
+                    $nestedData['receipt'] = '<i class="bi bi-check2-all fs-2 text-success"></i>';
+                } else {
+                    $nestedData['receipt'] = '<i class="bi bi-x-lg text-danger fs-2"></i>';
+                }
 
                 // $nestedData['user_type'] = $user->role_as;
                 // $nestedData['show_url'] = route('admin.user.show', $user->id);
@@ -98,7 +102,7 @@ class KhetiController extends Controller
                 // $nestedData['destroy_url'] = route('admin.user.destroy', $user->id);
                 // $nestedData['status_change_url'] = route('admin.user.status.change', $user->id);
 
-                $nestedData['actions'] = '<a href="' . route('kheti.receipt.index', $row->account_id) . '"  class="btn btn-warning text-dark btn-sm kheti_update"><i class="bi bi-card-checklist"></i></a>
+                $nestedData['actions'] = '<a href="' . route('kheti.receipt.index', $row->id) . '"  class="btn btn-warning text-dark btn-sm kheti_update"><i class="bi bi-card-checklist"></i></a>
                 <a href="javascript:void(0)"  data-bs-toggle="modal"
                             data-bs-target="#updateAccount" class="btn btn-primary text-white btn-sm" data-url="' . route('kheti.edit', $row->id) . '" data-id="' . $row->id . '" onclick="UpdateAccount(this)"><i class="bi bi-pencil-square"></i></a>
                 <a href="javascript:void(0)" onClick="destroyFunction(this)" data-id="' . $row->id . '"  data-url="' . route('kheti.delete', $row->id) . '" class="btn btn-danger text-white btn-sm user_delete"><i class="bi bi-trash"></i></a>

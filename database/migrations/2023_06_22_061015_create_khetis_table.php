@@ -34,6 +34,7 @@ return new class extends Migration
             $table->double('total_demand', 8, 2)->nullable();
             $table->double('total_receipt_collection', 8, 2)->nullable();
             $table->string('year')->nullable();
+            $table->bigInteger('book_no')->nullable();
             $table->tinyInteger('status')->default('0');
             $table->softDeletes();
             $table->timestamps();
