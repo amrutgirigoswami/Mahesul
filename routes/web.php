@@ -62,7 +62,8 @@ Route::prefix('admin')->group(function () {
     // All kheti receipt routes
     Route::controller(RecieptKhetiController::class)->group(function () {
         Route::get('/receipt/{id}', 'index')->name('kheti.receipt.index');
-        Route::post('/receipt/store/{id}','UpdateReceipt')->name('kheti.receipt.update');
+        Route::post('/receipt/store/{id}', 'UpdateReceipt')->name('kheti.receipt.update');
+        Route::post('/new-receipt/store', 'AddNewReceipt')->name('kheti.newreceipt.store');
     });
 });
 

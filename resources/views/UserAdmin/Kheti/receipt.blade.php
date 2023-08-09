@@ -127,12 +127,78 @@
                                 @endif
                             </div>
                         </div>
-
-                        <div class="row mb-3 mt-3" id="toggleDiv" style="display: none;">
+                        {{-- new Add reciept --}}
+                        <div class="row " id="toggleDiv" style="display: none;">
                             <hr>
-                            <div class="col-md-12">
+
+                            <div class="col-md-12 ">
                                 <!-- Your content goes here -->
-                                This is the hidden content. It will be displayed when the button is clicked.
+                                <div class="row">
+                                    <div class="col-md-2 mb-3 text-center">
+                                        <label for="new_receipt_no" class="mb-3">પહોંચ નં</label>
+                                        <input type="number" name="new_receipt_no" id="new_receipt_no"
+                                            class="form-control @error('new_receipt_no') is-invalid @enderror"
+                                            value="{{ old('new_receipt_no') }}">
+                                        @error('new_receipt_no')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
+                                    </div>
+                                    <div class="col-md-3 mb-3 text-center">
+                                        <label for="new_receipt_date" class="mb-3">પહોંચની તારીખ</label>
+                                        <input type="date" name="new_receipt_date" id="new_receipt_date"
+                                            class="form-control @error('new_receipt_date') is-invalid @enderror"
+                                            value="{{ old('new_receipt_date') }}">
+                                        @error('new_receipt_date')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
+                                    </div>
+                                    <div class="col-md-2 mb-3 text-center">
+                                        <label for="new_b_adhi" class="mb-3">B_Adhi</label>
+                                        <input type="number" name="new_b_adhi" id="new_b_adhi"
+                                            onkeyup="newRecieptCalculation(this)"
+                                            class="form-control @error('new_b_adhi') is-invalid @enderror"
+                                            value="{{ old('new_b_adhi') }}">
+                                        @error('new_b_adhi')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
+                                    </div>
+                                    <div class="col-md-2 mb-3 text-center">
+                                        <label for="new_total_demand" class="mb-3">કુલ ડિમાન્ડ</label>
+                                        <input type="number" name="new_total_demand" id="new_total_demand"
+                                            onkeyup="newRecieptCalculation(this)"
+                                            class="form-control @error('new_total_demand') is-invalid @enderror"
+                                            value="{{ old('new_total_demand') }}">
+                                        @error('new_total_demand')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
+                                    </div>
+                                    <div class="col-md-3 mb-3 text-center">
+                                        <label for="new_total_receipt_collection" class="mb-3">કુલ </label>
+                                        <input type="number" name="new_total_receipt_collection"
+                                            onkeyup="newRecieptCalculation(this)" id="new_total_receipt_collection"
+                                            class="form-control @error('new_total_receipt_collection') is-invalid @enderror"
+                                            value="{{ old('new_total_receipt_collection') }}" readonly>
+                                        @error('new_total_receipt_collection')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="row mt-2">
+                                    <div class="col-md-12">
+                                        <button type="button"
+                                            class="btn btn-primary float-end newReceiptUpdate">Update</button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -191,4 +257,7 @@
 
 @section('script')
     <script src="{{ asset('AllPageJS/Kheti/recieptCalculation.js') }}"></script>
+    <script>
+        var addNewReceiptUrl = "{{ route('kheti.newreceipt.store') }}";
+    </script>
 @endsection

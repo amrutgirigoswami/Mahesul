@@ -15,3 +15,9 @@
     color: white;
     font-weight: 600;
 }
+
+.receiptColInput {
+    background: linear-gradient(to bottom right, #badc2291 0%, #625c03c4 100%);
+    color: white;
+    font-weight: 600;
+}

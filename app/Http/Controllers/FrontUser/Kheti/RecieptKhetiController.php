@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\FrontUser\Kheti;
 
+use App\Models\ExistKhtiReceipt;
 use App\Models\Kheti;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use App\Http\Requests\UserAdmin\Kheti\UpdateReceiptRequest;
 
@@ -42,5 +44,27 @@ class RecieptKhetiController extends Controller
 
         Session::flash('success', 'Receipt Added Successfully');
         return redirect(route('kheti.list'));
+    }
+
+    public function AddNewReceipt(Request $request)
+    {
+        $userId = Auth::user()->id;
+        // $khetiData = ExistKhtiReceipt::where('account_id', $request->account_id)->get();
+
+        $newReceiptAdd = new ExistKhtiReceipt();
+
+        $newReceiptAdd->user_id = $userId;
+        $newReceiptAdd->account_id = $request->account_id;
+        $newReceiptAdd->receipt_no = $request->new_receipt_no;
+        $newReceiptAdd->receipt_date = $request->new_receipt_date;
+        $newReceiptAdd->b_adhi = $request->new_b_adhi;
+        $newReceiptAdd->total_collection = $request->new_total_demand;
+        $newReceiptAdd->total = $request->new_total_receipt_collection;
+        $newReceiptAdd->save();
+
+        return response()->json([
+            'message' => 'New Same Account Receipt Added Successfully !',
+            'status' => true,
+        ]);
     }
 }

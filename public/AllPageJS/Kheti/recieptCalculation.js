@@ -1,3 +1,12 @@
+function newRecieptCalculation() {
+    var newbAdhi = $('#new_b_adhi').val();
+    var newtotalDemand = $('#new_total_demand').val();
+
+    var newtotalRecieptCollection = parseFloat(newbAdhi) + parseFloat(newtotalDemand);
+    $('#new_total_receipt_collection').val(newtotalRecieptCollection.toFixed(2));
+
+}
+
 function recieptCalculation() {
     var bAdhi = $('#b_adhi').val();
     var totalDemand = $('#total_demand').val();
@@ -41,4 +50,39 @@ function recieptCalculation() {
 
 $("#toggleButton").click(function () {
     $("#toggleDiv").toggle();
+});
+
+
+$(document).on('click', '.newReceiptUpdate', function () {
+    var data = {
+        account_id: $('#account_id').val(),
+        new_receipt_no: $('#new_receipt_no').val(),
+        new_receipt_date: $('#new_receipt_date').val(),
+        new_b_adhi: $('#new_b_adhi').val(),
+        new_total_demand: $('#new_total_demand').val(),
+        new_total_receipt_collection: $('#new_total_receipt_collection').val(),
+        _token: csrfToken,
+    }
+    $.ajax({
+        type: "POST",
+        url: addNewReceiptUrl,
+        data: data,
+        dataType: "json",
+        success: function (response) {
+            console.log(response.status);
+            if (response.status == true) {
+                $('#new_receipt_no').val('');
+                $('#new_receipt_date').val('');
+                $('#new_b_adhi').val('');
+                $('#new_total_demand').val('');
+                $('#new_total_receipt_collection').val('');
+                $('#toggleDiv').css('display', 'none');
+                toastr.success(response.message);
+
+            } else {
+                toastr.error('Something went to wrong');
+
+            }
+        }
+    });
 });

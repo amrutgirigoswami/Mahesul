@@ -62,7 +62,7 @@ class KhetiController extends Controller
             $search = $request->input('search.value');
             $kheti = $kheti->where(function ($query) use ($search) {
                 $query->where('account_holder_name', 'LIKE', "%{$search}%")
-                    ->orWhere('account_id', 'LIKE', "%{$search}%");
+                    ->orWhere('account_id', "{$search}");
             });
 
             $totalFiltered =  $kheti->count();
