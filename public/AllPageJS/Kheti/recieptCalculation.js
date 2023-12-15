@@ -52,6 +52,9 @@ $("#toggleButton").click(function () {
     $("#toggleDiv").toggle();
 });
 
+$("#toggleButtonNew").click(function () {
+    $("#toggleDivNew").toggle();
+})
 
 $(document).on('click', '.newReceiptUpdate', function () {
     var data = {

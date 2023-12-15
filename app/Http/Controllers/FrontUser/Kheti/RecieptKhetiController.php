@@ -16,11 +16,13 @@ class RecieptKhetiController extends Controller
     public function index($id)
     {
         $kheti = Kheti::findOrFail($id);
+        $moreReceiptData = ExistKhtiReceipt::where('account_id', $kheti->account_id)->get();
 
         return view('UserAdmin.Kheti.receipt', [
             'title' => 'Add Receipt',
             'breadcrumb' => array(['title' => 'Add Receipt', 'link' => ""]),
-            'khetiData' => $kheti
+            'khetiData' => $kheti,
+            'existReceiptData' => $moreReceiptData
         ]);
     }
 

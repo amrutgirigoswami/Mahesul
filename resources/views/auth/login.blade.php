@@ -8,13 +8,36 @@
     <title></title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+
+
+    <style>
+        /* Custom styles to center the content */
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background: url("{{ asset('commonImage/loginback1.jpg') }}") center center/cover no-repeat fixed;
+        }
+
+        .login-container {
+            max-width: 400px;
+            width: 100%;
+        }
+
+        .custom-card {
+            background-color: rgba(255, 255, 255, 0.8);
+            /* Adjust the opacity (0 to 1) as needed */
+        }
+    </style>
 </head>
 
 <body>
-    <div class="container mt-5">
+    <div class="container ">
         <div class="row justify-content-center">
             <div class="col-md-7">
-                <div class="card">
+                <div class="card custom-card">
                     <div class="card-header">
                         <h4>{{ __('Login') }}</h4>
                     </div>
