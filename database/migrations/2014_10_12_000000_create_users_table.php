@@ -25,6 +25,7 @@ return new class extends Migration
             $table->string('pincode')->nullable();
             $table->string('contact_no')->nullable();
             $table->string('profile_image')->nullable();
+            $table->string('year')->nullable();
             $table->tinyInteger('role_as')->default(0)->comment('1-admin 0-user');
             $table->tinyInteger('status')->default(0)->comment('1-deactive 0-active');
             $table->rememberToken();

@@ -324,3 +324,39 @@
         </div>
     </div>
 </div><!-- End Large Modal-->
+
+
+{{-- Add Year Modal --}}
+<div class="modal fade" id="addYear" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog modal-lg p-2">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Add New Year</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row mb-3">
+                    <label for="account_id" class="col-md-3 col-lg-3"
+                        style="color: #000000;font-size: 18px;margin-top: 5px;font-weight: 400;">Add New Year</label>
+                    <div class="col-md-8 col-lg-8 col-sm-4">
+                        <input type="number" name="year" id="year"
+                            class="form-control account_id @error('year')
+                            is-invalid
+                        @enderror">
+                        @error('year')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                        @enderror
+                    </div>
+                </div>
+              
+            </div>
+            
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary UpdateAccount">Add Year</button>
+            </div>
+        </div>
+    </div>
+</div><!-- End Large Modal-->

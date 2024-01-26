@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::create('years', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('auth_id')->nullable();
             $table->string('year')->nullable();
             $table->softDeletes();
             $table->timestamps();

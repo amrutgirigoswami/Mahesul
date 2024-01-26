@@ -23,9 +23,9 @@
                              Imports</span></a>
                  </li>
                  <li class="sidebar-item">
-                     <a class="sidebar-link waves-effect waves-dark sidebar-link" href="tables.html"
-                         aria-expanded="false"><i class="mdi mdi-backup-restore"></i><span class="hide-menu">Database
-                             Backup</span></a>
+                     <a class="sidebar-link waves-effect waves-dark sidebar-link" href="javascript:void(0)"
+                         aria-expanded="false" data-bs-toggle="modal"
+                         data-bs-target="#addYear"><i class="mdi mdi-backup-restore"></i><span class="hide-menu">Add Year</span></a>
                  </li>
 
                  <li class="sidebar-item">
@@ -58,3 +58,4 @@
  <!-- ============================================================== -->
  <!-- End Left Sidebar - style you can find in sidebar.scss  -->
  <!-- ============================================================== -->
+ @include('layouts.allModal')

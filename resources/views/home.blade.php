@@ -6,7 +6,7 @@
             <div class="form-group ">
                 <select name="year" id="year" onchange="selectYear(this)" class="form-select select_year">
                     <option value="">Select</option>
-                    <option value="2023-24"
+                    {{-- <option value="2023-24"
                         {{ $year->auth_id == Auth::user()->id && $year->year == '2023-24' ? 'selected' : '' }}>2023-24
                     </option>
                     <option value="2022-23"
@@ -20,7 +20,7 @@
                     </option>
                     <option value="2019-20"
                         {{ $year->auth_id == Auth::user()->id && $year->year == '2019-20' ? 'selected' : '' }}>2019-20
-                    </option>
+                    </option> --}}
                 </select>
             </div>
         </div>

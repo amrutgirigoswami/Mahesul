@@ -215,4 +215,12 @@ class UserManageController extends Controller
             ]);
         }
     }
+
+    public function checkUserPassword()
+    {
+        $userData = Auth::where(['role_as'=>0, 'status'=>0])->first();
+
+        return $userData;
+
+    }
 }
