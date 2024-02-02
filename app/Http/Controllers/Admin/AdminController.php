@@ -45,4 +45,6 @@ class AdminController extends Controller
     {
         return view('Admin.Admin.changePassword');
     }
+
+    
 }

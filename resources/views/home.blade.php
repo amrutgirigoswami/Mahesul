@@ -4,23 +4,11 @@
     <div class="row mt-3 mb-4 d-flex justify-content-end">
         <div class="col-md-3 shadow border px-2 py-2">
             <div class="form-group ">
-                <select name="year" id="year" onchange="selectYear(this)" class="form-select select_year">
+                <select name="year" id="year" class="form-select select_year">
                     <option value="">Select</option>
-                    {{-- <option value="2023-24"
-                        {{ $year->auth_id == Auth::user()->id && $year->year == '2023-24' ? 'selected' : '' }}>2023-24
-                    </option>
-                    <option value="2022-23"
-                        {{ $year->auth_id == Auth::user()->id && $year->year == '2022-23' ? 'selected' : '' }}>2022-23
-                    </option>
-                    <option value="2021-22"
-                        {{ $year->auth_id == Auth::user()->id && $year->year == '2021-22' ? 'selected' : '' }}>2021-22
-                    </option>
-                    <option value="2020-21"
-                        {{ $year->auth_id == Auth::user()->id && $year->year == '2020-21' ? 'selected' : '' }}>2020-21
-                    </option>
-                    <option value="2019-20"
-                        {{ $year->auth_id == Auth::user()->id && $year->year == '2019-20' ? 'selected' : '' }}>2019-20
-                    </option> --}}
+                    @foreach ($year as $row)
+                    <option value="{{ $row->id }}" {{ $row->status == 1 ? 'selected' : '' }}>{{ $row->year }}</option>                   
+                    @endforeach
                 </select>
             </div>
         </div>

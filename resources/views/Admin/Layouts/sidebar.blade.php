@@ -25,7 +25,7 @@
                  <li class="sidebar-item">
                      <a class="sidebar-link waves-effect waves-dark sidebar-link" href="javascript:void(0)"
                          aria-expanded="false" data-bs-toggle="modal"
-                         data-bs-target="#addYear"><i class="mdi mdi-backup-restore"></i><span class="hide-menu">Add Year</span></a>
+                         data-bs-target="#addYear" ><i class="mdi mdi-backup-restore"></i><span class="hide-menu">Add Year</span></a>
                  </li>
 
                  <li class="sidebar-item">

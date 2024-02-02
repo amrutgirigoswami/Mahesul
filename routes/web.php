@@ -46,7 +46,7 @@ Route::prefix('admin')->group(function () {
     Route::get('/account-setting', [AccountSettingController::class, 'index'])->name('user.account.setting');
     Route::post('/store-account-settings', [AccountSettingController::class, 'store'])->name('user.account.setting.store');
 
-    Route::post('/yearSet', [HomeController::class, 'SetYear'])->name('user.setyear');
+    Route::post('/yearSet',[HomeController::class,'setYear'])->name('admin.setyear');
 
     // All Kheti Routes
     Route::controller(KhetiController::class)->group(function () {
@@ -65,6 +65,8 @@ Route::prefix('admin')->group(function () {
         Route::post('/receipt/store/{id}', 'UpdateReceipt')->name('kheti.receipt.update');
         Route::post('/new-receipt/store', 'AddNewReceipt')->name('kheti.newreceipt.store');
     });
+
+
 });
 
 
@@ -73,10 +75,13 @@ Route::prefix('superAdmin')->middleware(['auth', 'superAdmin'])->group(function 
     // Route::post('/register', [RegisterController::class, 'register']);
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('superAdmin.dashboard');
 
+    Route::post('/add-year', [DashboardController::class, 'addYear'])->name('user.addyear');
+
     // Admin Profile Manage
     Route::get('/profile', [AdminController::class, 'index'])->name('admin.profile');
     Route::post('/profile-update/{id}', [AdminController::class, 'UpdateProfile'])->name('admin.profile.update');
     Route::get('/change-password', [AdminController::class, 'ChangePassword'])->name('admin.profile.changepassword');
+   
 
     // all user routes
     Route::get('/user-manage', [UserManageController::class, 'index'])->name('users.list');

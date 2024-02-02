@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('years', function (Blueprint $table) {
             $table->id();
             $table->string('year')->nullable();
+            $table->tinyInteger('status')->default(0);
             $table->softDeletes();
             $table->timestamps();
         });

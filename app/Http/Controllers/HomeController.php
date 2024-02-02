@@ -26,7 +26,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $year = Year::first();
+        $year = Year::all();
         return view('home', [
             'title' => 'Dashboard',
             'breadcrumb' => array(),
@@ -34,31 +34,18 @@ class HomeController extends Controller
         ]);
     }
 
-    public function SetYear(Request $request)
+    public function setYear(Request $request)
     {
-        $authId = Auth::user()->id;
-
-        $fetchYear = Year::where('auth_id', $authId)->first();
-        if (empty($fetchYear)) {
-            $setYear = $request->year;
-            $yearData = new Year();
-            $yearData->year = $setYear;
-            $yearData->auth_id = Auth::user()->id;
-            $yearData->save();
-            return response()->json([
-                'message' => 'Year Set SuccessFull',
-                'status' => true,
-                'setData' => $setYear,
-            ]);
-        } else {
-            $setYear = Year::where('auth_id', $authId)->first();
-            $setData = $request->year;
-            $setYear->year = $setData;
-            $setYear->update();
+        $fetchYear = Year::where('id', $request->year)->first();
+        if($fetchYear->status == 0)
+        {
+            $fetchYear->status = 1;
+            $fetchYear->update();
+            Year::where('id', '!=', $request->year)->update(['status' => 0]);
             return response()->json([
                 'message' => 'Year Changed SuccessFull',
                 'status' => true,
-                'setData' => $setData,
+                'setData' => $fetchYear,
             ]);
         }
     }
